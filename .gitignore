@@ -175,3 +175,6 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+# Custom
+screenshots/
