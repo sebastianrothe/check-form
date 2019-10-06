@@ -4,14 +4,14 @@ context('Anmeldung Berlin', () => {
     cy.waitForResourceToLoad('jquery-3.4.1.min.js')
   })
 
-  it.skip('has a datepicker, which is readonly', () => {
+  it('has a datepicker, which is readonly', () => {
     const datepickerSelector =
       '#contact-form-18 form div input[type=text].hasDatepicker'
 
     cy.get(datepickerSelector).should('have.attr', 'readonly')
   })
 
-  it.skip('has a datepicker, which is opens, when clicked', () => {
+  it('has a datepicker, which is opens, when clicked', () => {
     const datepickerSelector =
       '#contact-form-18 form div input[type=text].hasDatepicker'
 
@@ -23,33 +23,36 @@ context('Anmeldung Berlin', () => {
       .screenshot()
   })
 
-  it.skip('has a form, with values', async () => {
-    const [name, datepicker, people, coupon, mail, phone] = await cy.get(
-      '#contact-form-18 form div input'
-    )
+  it('has a form, with values', () => {
+    return cy
+      .get('#contact-form-18 form div input')
+      .spread((name, datepicker, people, coupon, mail, phone) => {
+        // fill form
+        cy.wrap(name)
+          .type('Testuser')
+          .should('have.value', 'Testuser')
+        cy.wrap(datepicker)
+          .type('31.12.2022', { force: true })
+          .should('have.value', '31.12.2022')
+        cy.wrap(datepicker).type('{esc}', { force: true })
+        // cy.wrap(datepicker).click({ force: true })
+        // cy.wait(1000)
+        cy.wrap(people)
+          .type('1')
+          .should('have.value', '1')
+        cy.wrap(mail)
+          .type('kontakt@gruseltour-leipzig.de')
+          .should('have.value', 'kontakt@gruseltour-leipzig.de')
+        cy.wrap(phone)
+          .type('+49016096776494')
+          .should('have.value', '+49016096776494')
 
-    // fill form
-    cy.wrap(name)
-      .type('Testuser')
-      .should('have.value', 'Testuser')
-    cy.wrap(datepicker)
-      .type('31.12.2022', { force: true })
-      .should('have.value', '31.12.2022')
-      .type('{esc}', { force: true })
-    cy.wait(1000)
-    cy.wrap(people)
-      .type('1')
-      .should('have.value', '1')
-    cy.wrap(mail)
-      .type('kontakt@gruseltour-leipzig.de')
-      .should('have.value', 'kontakt@gruseltour-leipzig.de')
-    cy.wrap(phone)
-      .type('+49016096776494')
-      .should('have.value', '+49016096776494')
+        // cy.screenshot()
 
-    cy.screenshot()
-
-    // submit form
-    cy.get('#contact-form-18 form .contact-submit button[type=submit]').click()
+        // submit form
+        cy.get(
+          '#contact-form-18 form .contact-submit button[type=submit]'
+        ).click()
+      })
   })
 })
