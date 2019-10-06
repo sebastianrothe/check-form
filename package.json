@@ -6,8 +6,9 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "jest --watch",
-    "cy": "cypress open"
+    "test:jest": "jest --watch",
+    "test": "cypress run",
+    "test:gui": "cypress open"
   },
   "author": "",
   "license": "ISC",
