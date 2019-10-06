@@ -8,6 +8,7 @@
   "globals": {
     "page": true,
     "browser": true,
-    "cy": true
+    "cy": true,
+    "Cypress": true
   }
 }
