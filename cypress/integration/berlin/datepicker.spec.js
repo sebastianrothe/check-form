@@ -1,17 +1,17 @@
-context('Anmeldung Leipzig', () => {
+context('Anmeldung Berlin', () => {
   beforeEach(() => {
-    cy.visit('https://gruseltour-leipzig.de/anmeldung/')
+    cy.visit('https://gruseltour-berlin.de/')
     cy.waitForResourceToLoad('jquery-3.4.1.min.js')
   })
 
-  it('has a datepicker, which is readonly', () => {
+  it.skip('has a datepicker, which is readonly', () => {
     const datepickerSelector =
       '#contact-form-18 form div input[type=text].hasDatepicker'
 
     cy.get(datepickerSelector).should('have.attr', 'readonly')
   })
 
-  it('has a datepicker, which is opens, when clicked', () => {
+  it.skip('has a datepicker, which is opens, when clicked', () => {
     const datepickerSelector =
       '#contact-form-18 form div input[type=text].hasDatepicker'
 
@@ -23,7 +23,7 @@ context('Anmeldung Leipzig', () => {
       .screenshot()
   })
 
-  it('has a form, with values', async () => {
+  it.skip('has a form, with values', async () => {
     const [name, datepicker, people, coupon, mail, phone] = await cy.get(
       '#contact-form-18 form div input'
     )
