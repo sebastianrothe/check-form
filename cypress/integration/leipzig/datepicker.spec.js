@@ -1,23 +1,20 @@
-context('Anmeldung Leipzig', () => {
-  beforeEach(() => {
+describe('Anmeldung Leipzig', () => {
+  const datepickerSelector =
+    '#contact-form-18 form div input[type=text].hasDatepicker'
+
+  before(() => {
     cy.visit('https://gruseltour-leipzig.de/anmeldung/')
     cy.waitForResourceToLoad('jquery-3.4.1.min.js')
   })
 
   it('has a datepicker, which is readonly', () => {
-    const datepickerSelector =
-      '#contact-form-18 form div input[type=text].hasDatepicker'
-
     cy.get(datepickerSelector).should('have.attr', 'readonly')
   })
 
   it('has a datepicker, which is opens, when clicked', () => {
-    const datepickerSelector =
-      '#contact-form-18 form div input[type=text].hasDatepicker'
-
     cy.get(datepickerSelector)
       .should('have.class', 'hasDatepicker')
-      .should('have.class', 'ui-datepicker-readonly')
+      .and('have.class', 'ui-datepicker-readonly')
       .click({ force: true })
       .scrollIntoView()
       .screenshot()
@@ -29,14 +26,12 @@ context('Anmeldung Leipzig', () => {
       .spread((name, datepicker, people, coupon, mail, phone) => {
         // fill form
         cy.wrap(name)
-          .type('Testuser')
-          .should('have.value', 'Testuser')
+          .type('Test User')
+          .should('have.value', 'Test User')
         cy.wrap(datepicker)
           .type('31.12.2022', { force: true })
           .should('have.value', '31.12.2022')
         cy.wrap(datepicker).type('{esc}', { force: true })
-        // cy.wrap(datepicker).click({ force: true })
-        // cy.wait(1000)
         cy.wrap(people)
           .type('1')
           .should('have.value', '1')
@@ -46,8 +41,6 @@ context('Anmeldung Leipzig', () => {
         cy.wrap(phone)
           .type('+49016096776494')
           .should('have.value', '+49016096776494')
-
-        // cy.screenshot()
 
         // submit form
         cy.get(
