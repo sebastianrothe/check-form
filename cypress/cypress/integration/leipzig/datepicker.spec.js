@@ -1,10 +1,10 @@
-describe('Anmeldung Leipzig', () => {
+describe.skip('Anmeldung Leipzig', () => {
   const datepickerSelector =
     '#contact-form-18 form div input[type=text].hasDatepicker'
 
   before(() => {
     cy.visit('https://gruseltour-leipzig.de/anmeldung/')
-    cy.waitForResourceToLoad('jquery-3.4.1.min.js')
+    //cy.waitForResourceToLoad('jquery-3.4.1.min.js')
   })
 
   it('has a datepicker, which is readonly', () => {

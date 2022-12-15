@@ -3,7 +3,7 @@ describe('Anmeldung Berlin', () => {
 
   before(() => {
     cy.visit('https://gruseltour-berlin.de/')
-    cy.waitForResourceToLoad('jquery-3.4.1.min.js')
+    //cy.waitForResourceToLoad('jquery-3.4.1.min.js')
   })
 
   it('has a datepicker, which is readonly', () => {
