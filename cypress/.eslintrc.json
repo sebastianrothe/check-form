@@ -1,0 +1,14 @@
+{
+  "plugins": ["jest"],
+  "extends": ["prettier-standard", "plugin:jest/recommended"],
+  "env": {
+    "jest": true,
+    "jest/globals": "true"
+  },
+  "globals": {
+    "page": true,
+    "browser": true,
+    "cy": true,
+    "Cypress": true
+  }
+}
