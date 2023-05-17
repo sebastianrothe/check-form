@@ -25,7 +25,9 @@ test('test', async ({ page }) => {
   await page.getByLabel('Und deine Handynummer, damit wir dich im Notfall erreichen können: *').fill('123');
 
   await page.getByRole('button', { name: 'Anmelden' }).click()
-  await page.waitForNavigation({url:"https://gruseltour-goerlitz.de/anmeldung-erfolgreich/"});
+
+  // only use in combination with ajax submits
+  //await page.waitForURL(({url:"https://gruseltour-goerlitz.de/anmeldung-erfolgreich/"});
 
   await expect(page).toHaveURL("https://gruseltour-goerlitz.de/anmeldung-erfolgreich/");
   await page.getByRole('heading', { name: 'Anmeldung erfolgreich' }).click();
