@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const IS_AJAX_SUBMIT_ENABLED = true;
+
 test('test', async ({ page }) => {
   await page.goto('https://gruseltour-goerlitz.de/');
 
@@ -26,9 +28,13 @@ test('test', async ({ page }) => {
 
   await page.getByRole('button', { name: 'Anmelden' }).click()
 
-  // only use in combination with ajax submits
-  //await page.waitForURL(({url:"https://gruseltour-goerlitz.de/anmeldung-erfolgreich/"});
+  const URL_SUCCESS = "https://gruseltour-goerlitz.de/anmeldung-erfolgreich/"
 
-  await expect(page).toHaveURL("https://gruseltour-goerlitz.de/anmeldung-erfolgreich/");
+  if (IS_AJAX_SUBMIT_ENABLED) {
+      await page.waitForURL(URL_SUCCESS);
+  } else {
+      await expect(page).toHaveURL(URL_SUCCESS);
+  }
+
   await page.getByRole('heading', { name: 'Anmeldung erfolgreich' }).click();
 });
