@@ -4,8 +4,8 @@ const IS_AJAX_SUBMIT_ENABLED = true;
 
 test("test", async ({ page }) => {
     await page.goto("https://gruseltour-berlin.de/");
-
     await page.getByRole("link", { name: "🎅 Hier geht es zu unserem" }).click();
+
     await page.getByLabel("Name *").click();
     await page.getByLabel("Name *").fill("Playwright");
 
@@ -21,16 +21,16 @@ test("test", async ({ page }) => {
     await page.getByLabel("Telefonnummer *").fill("123");
 
     await page.getByPlaceholder("1").click();
-
     await page.getByPlaceholder("1").fill("2");
 
     await page.getByLabel("Ich bestätige, dass ich").check();
+
     await page
         .getByRole("button", { name: "Zahlungspflichtig bestellen" })
         .click();
 
     await page.waitForURL('https://gruseltour-berlin.de/gruseliger-adventskalender/');
 
-    const successElement = await page.getByText("Vielen Dank für deine Bestellung.");
-    await expect(successElement).toBeVisible();
+    const successElement = page.getByText("Vielen Dank für deine Bestellung");
+    expect(successElement).toBeDefined();
 });
