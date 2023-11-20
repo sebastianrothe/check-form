@@ -30,8 +30,11 @@ test("test", async ({ page }) => {
         .getByRole("button", { name: "Zahlungspflichtig bestellen" })
         .click();
 
-    await page.waitForURL('https://gruseltour-leipzig.de/gruseliger-adventskalender/');
+    await page.waitForURL('https://gruseltour-leipzig.de/gruseliger-adventskalender/', {waitUntil: "networkidle"});
+
+    const heading = page.getByRole('heading', { name: 'Gruseliger Adventskalender für Erwachsene' });
+    await expect(heading).toBeVisible();
 
     const successElement = page.getByText("Vielen Dank für deine Bestellung");
-    expect(successElement).toBeDefined();
+    await expect(successElement).toBeVisible();
 });
