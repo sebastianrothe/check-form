@@ -21,9 +21,6 @@ test("test", async ({ page }) => {
     await page.getByLabel("Telefonnummer *").click();
     await page.getByLabel("Telefonnummer *").fill("123");
 
-    await page.getByPlaceholder("1").click();
-    await page.getByPlaceholder("1").fill("2");
-
     await page.getByLabel("Ich bestätige, dass ich").check();
 
     await page
