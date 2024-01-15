@@ -16,10 +16,10 @@ jobs:
             matrix:
                 city: [leipzig, berlin, goerlitz]
         steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
               with:
-                  node-version: 18
+                  node-version: lts
 
             - name: Install dependencies
               run: npm ci
@@ -30,7 +30,7 @@ jobs:
             - name: Check Purchasing
               run: npx playwright test purchase/buy-calendar-${{ matrix.city }}
 
-            - uses: actions/upload-artifact@v3
+            - uses: actions/upload-artifact@v4
               if: always()
               with:
                   name: playwright-report
