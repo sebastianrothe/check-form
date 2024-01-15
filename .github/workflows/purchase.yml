@@ -1,34 +1,38 @@
 name: Playwright Tests
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
-    branches: [ main, master ]
-  schedule:
-    - cron: '30 6,14 * * *'
+    push:
+        branches: [main, master]
+    pull_request:
+        branches: [main, master]
+    schedule:
+        - cron: "30 6,14 * * *"
 
 jobs:
-  test:
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+    purchase:
+        name: Purchase Calendar
+        timeout-minutes: 10
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                city: [leipzig, berlin, goerlitz]
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 18
 
-    - name: Install dependencies
-      run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+            - name: Install Playwright Browsers
+              run: npx playwright install --with-deps
 
-    - name: Check Purchasing
-      run: npx playwright test purchase
+            - name: Check Purchasing
+              run: npx playwright test purchase/buy-calendar-${{ matrix.city }}
 
-    - uses: actions/upload-artifact@v3
-      if: always()
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 5
+            - uses: actions/upload-artifact@v3
+              if: always()
+              with:
+                  name: playwright-report
+                  path: playwright-report/
+                  retention-days: 5
