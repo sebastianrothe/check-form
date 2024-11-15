@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "pretest": "playwright install",
+    "test": "playwright test register",
+    "test:ui": "playwright test ./tests/register/fill-form-goerlitz.spec.ts --ui"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
