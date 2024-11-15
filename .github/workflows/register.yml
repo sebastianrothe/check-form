@@ -22,7 +22,7 @@ jobs:
               run: npm ci
 
             - name: Install Playwright Browsers
-              run: npx playwright install --with-deps --only-shell
+              run: npx playwright install --with-deps #--only-shell
 
             - name: Check Forms
               run: npx playwright test register
