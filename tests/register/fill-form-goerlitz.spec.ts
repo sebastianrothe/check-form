@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const IS_AJAX_SUBMIT_ENABLED = true;
 
 test('test', async ({ page }) => {
-  await page.goto('https://gruseltour-goerlitz.de/');
+  await page.goto('https://gruseltour-goerlitz.de/', { waitUntil: 'networkidle' });
 
   await page.getByLabel('Wann möchtest du die Tour buchen? Die Touren finden Freitag, Samstag und auch an Feiertagen statt. *').click();
   await page.locator('a').filter({ hasText: 'Vor&#x3E;' }).click();
